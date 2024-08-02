@@ -1,4 +1,0 @@
-2024-08-01 23:40:52,451 - WARNING - PyNaCl is not installed, voice will NOT be supported
-2024-08-01 23:40:52,451 - INFO - logging in using static token
-2024-08-01 23:40:55,371 - INFO - Shard ID None has connected to Gateway (Session ID: f96cefd31ad6daf708baba8e8a999ea7).
-2024-08-01 23:40:58,490 - INFO - MR 2 has unsuccessful pipeline: failed
