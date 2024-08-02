@@ -13,8 +13,13 @@ PROJECT_ACCESS_TOKEN: str = os.getenv('PROJECT_ACCESS_TOKEN')
 
 USER_IDS: list = list(map(int, os.getenv("USER_IDS").split(",")))
 
+APPROVERS_IDS: list = list(map(int, os.getenv("APPROVERS_IDS").split(",")))
+
+DISCORD_TOKEN: str = os.getenv('DISCORD_TOKEN')
+DISCORD_CHANNEL_ID: int = int(os.getenv('DISCORD_CHANNEL_ID'))
+
 HEADERS = {
     'Private-Token': PRIVATE_TOKEN
 }
 
-SLEEP_PAUSE = 300
+SLEEP_PAUSE = 60
