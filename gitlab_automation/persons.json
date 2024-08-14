@@ -1,0 +1,12 @@
+{
+  "persons": [
+    {
+      "gitlab_name": "Зайков Артём",
+      "gitlab_id": 69,
+      "discord_name": "@aykoza",
+      "discord_id": 707814297014763550,
+      "jira_name": "artem.zaykov@zyfra.com",
+      "jira_id": 1
+    }
+  ]
+}
