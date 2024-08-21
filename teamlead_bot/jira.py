@@ -2,13 +2,14 @@ import time
 from atlassian import Jira
 
 from config import JIRA_TOKEN
-from teamlead_bot.reports import StatusByDeveloperReport, StatusByTeamReport
+from teamlead_bot.reports import StatusByDeveloperReport, StatusByTeamReport, PriorityReport
 from teamlead_bot.sprint import Sprint
 
 jira = Jira(
     url='https://jira.zyfra.com',
     token=JIRA_TOKEN
 )
+
 
 # sprint = Sprint(jira, 530, 'Grey')
 # jql_request = 'project = VItemp/StatusByDeveloperReportSTV8 AND Sprint = {}'.format(sprint.id)
@@ -34,6 +35,9 @@ def generate_jira_report():
     save_tmp(StatusByTeamReport.tmp_prefix_name,
              StatusByTeamReport.build(sprint_issues, sprint))
 
+    save_tmp(PriorityReport.tmp_prefix_name,
+             PriorityReport.build(sprint_issues, sprint))
+
 
 def run():
     while True:
@@ -43,18 +47,6 @@ def run():
 
 if __name__ == "__main__":
     run()
-
-
-
-
-
-
-
-
-
-
-
-
 
 # class JiraProcessor:
 #     jql_request = 'project = VISTV8 AND Sprint = {}'

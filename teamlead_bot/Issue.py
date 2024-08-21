@@ -137,3 +137,18 @@ class Issue:
     def spent_time(self):
         time = self.data['timetracking'].get('timeSpentSeconds') or 0
         return time / 3600
+
+    @property
+    def priority(self):
+        priority = self.data.get('priority', {}).get('name', 'Нет приоритета')
+        priority_mapping = {
+            'Критичный': 1,
+            'Высокий': 2,
+            'Средний': 3,
+            'Низкий': 4,
+            'Планируемый': 5,
+            'Блокирующий': 6,
+            'Минор': 7
+        }
+        return priority_mapping.get(priority, 8)
+

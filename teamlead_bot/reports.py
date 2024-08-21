@@ -13,6 +13,74 @@ class IReport(ABC):
         pass
 
 
+class PriorityReport(IReport):
+    tmp_prefix_name = 'PriorityReport'
+
+    raw = (
+        "- {} | {} | {} | {} | {} | {}"  # Формат строки для задачи
+    )
+
+    @classmethod
+    def build(cls, issues, sprint: Sprint):
+        manager = cls.manager(issues)
+        result = []
+
+        # Порядок статусов, который вам нужен
+        status_order = ['В работе', 'Назначено', 'Бэклог продукта', 'Пауза']
+
+        for dev in manager.developer_generate():
+            dev_issues = manager.get_issues_by_assignee(dev)
+
+            if not dev_issues:
+                continue
+
+            # Фильтруем задачи по статусам (берем только те, которые нам нужны)
+            filtered_issues = [i for i in dev_issues if i.status in status_order]
+
+            # Сортируем задачи сначала по статусу, затем по приоритету
+            sorted_issues = sorted(
+                filtered_issues,
+                key=lambda i: (status_order.index(i.status), i.priority)
+            )
+
+            # Добавляем разработчика в начало
+            if sorted_issues:
+                result.append(f"👤 {dev}:")
+
+            for issue in sorted_issues:
+                priority_name = cls.get_priority_name(issue.priority)
+                result.append(cls.raw.format(
+                    issue.status,  # Название статуса
+                    priority_name,  # Название приоритета
+                    issue.name,  # Название задачи
+                    f"https://jira.zyfra.com/browse/{issue.key}",  # Ссылка на задачу в Jira
+                    f"{issue.original_estimate}ч",  # Исходная оценка времени
+                    f"{issue.remaining_estimate}ч"  # Оставшееся время
+                ))
+
+            if sorted_issues:
+                result.append("")
+
+        final_result = "\n".join(result)
+        if not final_result.strip():
+            final_result = "Нет задач для отображения."
+
+        return final_result
+
+    @staticmethod
+    def get_priority_name(priority):
+        priority_mapping = {
+            1: 'Критичный',
+            2: 'Высокий',
+            3: 'Средний',
+            4: 'Низкий',
+            5: 'Планируемый',
+            6: 'Блокирующий',
+            7: 'Минор'
+        }
+        return priority_mapping.get(priority, 'Неизвестный')
+
+
 class StatusByDeveloperReport(IReport):
     tmp_prefix_name = 'StatusByDeveloperReport'
     raw = (
