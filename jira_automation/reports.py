@@ -1,7 +1,7 @@
 from abc import abstractmethod, ABC
 
-from teamlead_bot.Issue import IssueManager
-from teamlead_bot.sprint import Sprint
+from jira_automation.Issue import IssueManager
+from jira_automation.sprint import Sprint
 
 
 class IReport(ABC):

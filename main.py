@@ -4,8 +4,8 @@ import discord
 from discord.ext import tasks, commands
 
 from gitlab_automation.gitlab_merge_request_checker import GitLabMergeRequestChecker
-from teamlead_bot.jira import generate_jira_report
-from teamlead_bot.reports import StatusByTeamReport, StatusByDeveloperReport, PriorityReport
+from jira_automation.jira import generate_jira_report
+from jira_automation.reports import StatusByTeamReport, StatusByDeveloperReport, PriorityReport
 
 # Настройки бота
 intents = discord.Intents.all()
@@ -44,21 +44,21 @@ async def ping(ctx):
 # @bot.command()
 # async def sprint(ctx, arg):
 #     if arg == 'team':
-#         result = open(f'teamlead_bot/temp/{StatusByTeamReport.tmp_prefix_name}').read()
+#         result = open(f'jira_automation/temp/{StatusByTeamReport.tmp_prefix_name}').read()
 #     elif arg == 'dev':
-#         result = open(f'teamlead_bot/temp/{StatusByDeveloperReport.tmp_prefix_name}').read()
+#         result = open(f'jira_automation/temp/{StatusByDeveloperReport.tmp_prefix_name}').read()
 #     elif arg == 'priority':
-#         result = open(f'teamlead_bot/temp/{PriorityReport.tmp_prefix_name}').read()
+#         result = open(f'jira_automation/temp/{PriorityReport.tmp_prefix_name}').read()
 #     await ctx.send(result)
 
 @bot.command()
 async def sprint(ctx, arg):
     if arg == 'team':
-        result = open(f'teamlead_bot/temp/{StatusByTeamReport.tmp_prefix_name}').read()
+        result = open(f'jira_automation/temp/{StatusByTeamReport.tmp_prefix_name}').read()
     elif arg == 'dev':
-        result = open(f'teamlead_bot/temp/{StatusByDeveloperReport.tmp_prefix_name}').read()
+        result = open(f'jira_automation/temp/{StatusByDeveloperReport.tmp_prefix_name}').read()
     elif arg == 'priority':
-        result = open(f'teamlead_bot/temp/{PriorityReport.tmp_prefix_name}').read()
+        result = open(f'jira_automation/temp/{PriorityReport.tmp_prefix_name}').read()
 
     # Разделяем сообщение на части длиной не более 2000 символов
     for i in range(0, len(result), 2000):

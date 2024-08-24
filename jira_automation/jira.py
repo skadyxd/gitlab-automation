@@ -2,8 +2,8 @@ import time
 from atlassian import Jira
 
 from config import JIRA_TOKEN
-from teamlead_bot.reports import StatusByDeveloperReport, StatusByTeamReport, PriorityReport
-from teamlead_bot.sprint import Sprint
+from jira_automation.reports import StatusByDeveloperReport, StatusByTeamReport, PriorityReport
+from jira_automation.sprint import Sprint
 
 jira = Jira(
     url='https://jira.zyfra.com',
@@ -19,7 +19,7 @@ jira = Jira(
 
 
 def save_tmp(file, data):
-    with open('teamlead_bot/temp/{}'.format(file), 'w') as f:
+    with open('jira_automation/temp/{}'.format(file), 'w') as f:
         f.write(data)
 
 
